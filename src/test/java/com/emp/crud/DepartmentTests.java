@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.util.Arrays;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,21 @@ public class DepartmentTests {
         assertEquals(3, deptList.size());
         verify(mock, times(1)).getAllDepartments();
     }
+	
+	@Test
+	public void findByDepartmentTest()
+	{
+		 List<DepartmentEntity> list = new ArrayList<DepartmentEntity>();
+	       
+		 DepartmentEntity deptOne = new DepartmentEntity((long) 1,"Security","Delhi");
+		 list.add(deptOne);
+		 when(mock.findByDepartment("yogesh"))
+		.thenReturn(list);
+
+		 List<DepartmentEntity> deptList = mock.findByDepartment("yogesh");
+
+		 assertEquals(1, deptList.size());
+	        verify(mock, times(1)).findByDepartment("yogesh");
+	}
 
 }
