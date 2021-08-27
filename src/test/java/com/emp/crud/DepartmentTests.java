@@ -9,20 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.emp.crud.model.DepartmentEntity;
 import com.emp.crud.model.EmployeeEntity;
 import com.emp.crud.service.DepartmentService;
 import com.emp.crud.service.EmployeeService;
 
+
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class DepartmentTests {
 
 	@Autowired
 	private DepartmentService departmentService;
+
 	
+	DepartmentService mock = org.mockito.Mockito.mock(DepartmentService.class);
 
 	@Test
     public void getAllDepartmentTest()
@@ -36,13 +42,13 @@ public class DepartmentTests {
         list.add(deptTwo);
         list.add(deptThree);
          
-        when(departmentService.getAllDepartments()).thenReturn(list);
+        when(mock.getAllDepartments()).thenReturn(list);
          
         //test
-        List<DepartmentEntity> deptList = departmentService.getAllDepartments();
+        List<DepartmentEntity> deptList = mock.getAllDepartments();
          
         assertEquals(3, deptList.size());
-        verify(departmentService, times(1)).getAllDepartments();
+        verify(mock, times(1)).getAllDepartments();
     }
 
 }
