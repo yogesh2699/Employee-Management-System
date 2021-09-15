@@ -35,7 +35,6 @@ public class DepartmentEntity {
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="dep_id")
     private Long id;
 

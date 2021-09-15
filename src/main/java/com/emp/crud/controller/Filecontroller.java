@@ -1,4 +1,4 @@
-package com.emp.crud.web;
+package com.emp.crud.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,8 +52,7 @@ public class Filecontroller {
           .path(dbFile.getId())
           .toUriString();
 
-      return new ResponseFile(
-          
+      return new ResponseFile( 
           dbFile.getId(),
           dbFile.getName(),
           fileDownloadUri,

@@ -14,4 +14,5 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Lo
 	@Query(value="SELECT * FROM departments WHERE dept_location=?1",nativeQuery=true)
 	List<DepartmentEntity> findByDepartmentLocation(String dept_location);
 	
+	
 }

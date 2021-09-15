@@ -1,4 +1,4 @@
-package com.emp.crud.web;
+package com.emp.crud.controller;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.emp.crud.exception.RecordNotFoundException;
 import com.emp.crud.model.DepartmentEntity;
 import com.emp.crud.model.EmployeeEntity;
-import com.emp.crud.service.DepartmentService;
+import com.emp.crud.service.DepartmentImpl;
 
 @RestController
 @RequestMapping("/department")
@@ -23,7 +23,7 @@ public class DepartmentController {
 	
 	
 	 @Autowired
-	 DepartmentService departmentservice;
+	 DepartmentImpl departmentservice;
 	 @GetMapping
 	    public ResponseEntity<List<DepartmentEntity>> getAllEmployees() {
 	        List<DepartmentEntity> list = departmentservice.getAllDepartments();

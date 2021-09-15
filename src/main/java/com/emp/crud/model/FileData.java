@@ -12,11 +12,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "files")
 public class FileData {
-  @Id
-  //@GeneratedValue(generator = "uuid")
- // @GenericGenerator(name = "uuid", strategy = "uuid2")
-  private String id;
-
+	/*
+	 * @Id //@GeneratedValue(generator = "uuid") // @GenericGenerator(name = "uuid",
+	 * strategy = "uuid2") private String id;
+	 */
+	@Id
+	private String id;
+	
   private String name;
 
   private String type;
@@ -34,11 +36,19 @@ public class FileData {
     this.data = data;
   }
 
-  public String getId() {
-    return id;
-  }
+	
+	  public String getId() { return id; }
+	 
 
-  public String getName() {
+  public FileData(String id, String name, String type, byte[] data) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.data = data;
+	}
+
+public String getName() {
     return name;
   }
 

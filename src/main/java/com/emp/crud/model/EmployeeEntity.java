@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class EmployeeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     @Column(name="first_name")

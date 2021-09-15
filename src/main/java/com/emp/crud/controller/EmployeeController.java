@@ -1,10 +1,11 @@
-package com.emp.crud.web;
+package com.emp.crud.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emp.crud.exception.RecordNotFoundException;
 import com.emp.crud.model.EmployeeEntity;
-import com.emp.crud.service.EmployeeService;
+import com.emp.crud.service.EmployeeImpl;
  
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController
 {
     @Autowired
-    EmployeeService service;
+    EmployeeImpl service;
+    
+   
  
     @GetMapping
     public ResponseEntity<List<EmployeeEntity>> getAllEmployees(
@@ -45,7 +48,7 @@ public class EmployeeController
 	 * HttpStatus.OK); }
 	 */
  
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmployeeEntity> getEmployeeById(@PathVariable("id") Long id)
                                                     throws RecordNotFoundException {
         EmployeeEntity entity = service.getEmployeeById(id);
@@ -53,7 +56,7 @@ public class EmployeeController
         return new ResponseEntity<EmployeeEntity>(entity, new HttpHeaders(), HttpStatus.OK);
     }
  
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmployeeEntity> createOrUpdateEmployee(EmployeeEntity employee)
                                                     throws RecordNotFoundException {
         EmployeeEntity updated = service.createOrUpdateEmployee(employee);
@@ -61,10 +64,10 @@ public class EmployeeController
     }
  
     @DeleteMapping("/{id}")
-    public HttpStatus deleteEmployeeById(@PathVariable("id") Long id)
+    public boolean deleteEmployeeById(@PathVariable("id") Long id)
                                                     throws RecordNotFoundException {
-        service.deleteEmployeeById(id);
-        return HttpStatus.FORBIDDEN;
+        
+        return service.deleteEmployeeById(id);
     }
  
 }
