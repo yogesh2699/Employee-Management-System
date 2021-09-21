@@ -1,4 +1,4 @@
-package com.emp.crud.service;
+package com.emp.crud.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import com.emp.crud.exception.RecordNotFoundException;
 import com.emp.crud.model.DepartmentEntity;
 import com.emp.crud.model.EmployeeEntity;
 import com.emp.crud.repository.DepartmentRepository;
+import com.emp.crud.service.DepartmentService;
 
 
 

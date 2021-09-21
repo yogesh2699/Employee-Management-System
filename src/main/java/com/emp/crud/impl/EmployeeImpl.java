@@ -1,4 +1,4 @@
-package com.emp.crud.service;
+package com.emp.crud.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.emp.crud.exception.RecordNotFoundException;
 import com.emp.crud.model.EmployeeEntity;
 import com.emp.crud.repository.EmployeeRepository;
+import com.emp.crud.service.EmployeeService;
  
 @Service
 public class EmployeeImpl implements EmployeeService{
@@ -45,6 +46,11 @@ public class EmployeeImpl implements EmployeeService{
         }
     }
      
+    public List<EmployeeEntity> getAllEmployee()
+    {
+    	 return (List<EmployeeEntity>) repository.findAll();
+       
+    }
     public EmployeeEntity getEmployeeById(Long i) throws RecordNotFoundException 
     {
         Optional<EmployeeEntity> employee = repository.findById(i);

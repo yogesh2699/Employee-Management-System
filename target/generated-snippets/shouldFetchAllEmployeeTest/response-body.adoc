@@ -1,0 +1,19 @@
+[source,options="nowrap"]
+----
+[ {
+  "id" : 1,
+  "firstName" : "John",
+  "lastName" : "Paul",
+  "email" : "howtodoinjava@gmail.com"
+}, {
+  "id" : 2,
+  "firstName" : "Alex",
+  "lastName" : "kolenchiski",
+  "email" : "alexk@yahoo.com"
+}, {
+  "id" : 4,
+  "firstName" : "Yogesh",
+  "lastName" : "goel",
+  "email" : "xyz@gmail.com"
+} ]
+----

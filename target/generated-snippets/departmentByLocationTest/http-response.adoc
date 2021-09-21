@@ -1,0 +1,28 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Length: 419
+Content-Type: application/json;charset=UTF-8
+
+[ {
+  "id" : 1,
+  "deptName" : "Security",
+  "deptLoc" : "Delhi",
+  "employees" : [ {
+    "id" : 2,
+    "firstName" : "Alex",
+    "lastName" : "kolenchiski",
+    "email" : "alexk@yahoo.com"
+  }, {
+    "id" : 1,
+    "firstName" : "John",
+    "lastName" : "Paul",
+    "email" : "John@gmail.com"
+  } ]
+}, {
+  "id" : 2,
+  "deptName" : "Cloud Architecture",
+  "deptLoc" : "Delhi",
+  "employees" : [ ]
+} ]
+----

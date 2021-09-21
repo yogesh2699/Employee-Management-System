@@ -15,9 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.emp.crud.exception.RecordNotFoundException;
+import com.emp.crud.impl.DepartmentImpl;
 import com.emp.crud.model.DepartmentEntity;
 import com.emp.crud.repository.DepartmentRepository;
-import com.emp.crud.service.DepartmentImpl;
+
 
 
 @RunWith(SpringRunner.class)

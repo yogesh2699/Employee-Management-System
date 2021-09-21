@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emp.crud.exception.RecordNotFoundException;
+import com.emp.crud.impl.EmployeeImpl;
 import com.emp.crud.model.EmployeeEntity;
-import com.emp.crud.service.EmployeeImpl;
+
  
 @RestController
 @RequestMapping("/employees")
@@ -40,13 +41,14 @@ public class EmployeeController
     }
     
     
-	/*
-	 * @GetMapping public ResponseEntity<List<EmployeeEntity>> getAllEmployees() {
-	 * List<EmployeeEntity> list = service.getAllEmployees();
-	 * 
-	 * return new ResponseEntity<List<EmployeeEntity>>(list, new HttpHeaders(),
-	 * HttpStatus.OK); }
-	 */
+	
+	  @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	  public ResponseEntity<List<EmployeeEntity>> fetchAllEmployees() {
+	  List<EmployeeEntity> list = service.getAllEmployee();
+	  
+	  return new ResponseEntity<List<EmployeeEntity>>(list, new HttpHeaders(),
+	  HttpStatus.OK); }
+	 
  
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmployeeEntity> getEmployeeById(@PathVariable("id") Long id)

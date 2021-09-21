@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emp.crud.exception.RecordNotFoundException;
+import com.emp.crud.impl.DepartmentImpl;
 import com.emp.crud.model.DepartmentEntity;
 import com.emp.crud.model.EmployeeEntity;
-import com.emp.crud.service.DepartmentImpl;
+
 
 @RestController
 @RequestMapping("/department")

@@ -1,0 +1,10 @@
+[source,bash]
+----
+$ echo '{
+  "id" : 5,
+  "firstName" : "Jeff",
+  "lastName" : "Buzz",
+  "email" : "Jeff@gmail.com"
+}' | http POST 'http://localhost:8080/employees' \
+    'Content-Type:application/json;charset=UTF-8'
+----

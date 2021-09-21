@@ -1,0 +1,30 @@
+= Employee CRUD Spring REST Docs
+
+This is an example output for a service running at http://localhost:9091:
+
+
+== GET API Example
+
+.request
+include::{snippets}/shouldFetchAllEmployeeTest/http-request.adoc[]
+
+.response
+include::{snippets}/shouldFetchAllEmployeeTest/http-response.adoc[]
+
+== GET API Example
+
+.request
+include::{snippets}/employeeByIdTest/http-request.adoc[]
+
+.response
+include::{snippets}/employeeByIdTest/http-response.adoc[]
+
+== DELETE API Example
+
+.request
+include::{snippets}/deleteByEmployeeIdTest/http-request.adoc[]
+
+.response
+include::{snippets}/deleteByEmployeeIdTest/http-response.adoc[]
+
+The data which we can see as part of documentation will loaded from MockMvc Test case data
