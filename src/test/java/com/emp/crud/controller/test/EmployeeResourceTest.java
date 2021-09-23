@@ -1,6 +1,8 @@
 package com.emp.crud.controller.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,7 +39,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.emp.crud.controller.EmployeeController;
 import com.emp.crud.impl.EmployeeImpl;
 import com.emp.crud.model.EmployeeEntity;
@@ -47,6 +50,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 @ExtendWith({ RestDocumentationExtension.class, SpringExtension.class})
 @WebAppConfiguration
 @WebMvcTest(controllers = EmployeeController.class)
@@ -68,8 +72,7 @@ public class EmployeeResourceTest {
 	private EmployeeImpl empService;
 
 	
-	@MockBean
-	private EmployeeRepository repository;
+	EmployeeRepository mock = org.mockito.Mockito.mock(EmployeeRepository.class);
 	
 	
 	  @BeforeEach
@@ -90,7 +93,9 @@ public class EmployeeResourceTest {
 
 		  public static String requestBody(Object request) {
 		    try {
-		      return MAPPER.writeValueAsString(request);
+		    
+		    	
+		    	return MAPPER.writeValueAsString(request);
 		    } catch (JsonProcessingException e) {
 		      throw new RuntimeException(e);
 		    }
@@ -115,21 +120,29 @@ public class EmployeeResourceTest {
 		emp.setLastName("goel");
 		emp.setEmail("xyz@gmail.com");
 		
+		
+		String uri = "/employees/4";
 		/* convert object into JSON object */
 		String objectJson = requestBody(emp);
 		
 		given(empService.getEmployeeById((long)4)).willReturn(emp);
-		//given(repository.findById((long) 4)).willReturn(Optional.of(emp));
-		 MvcResult result =	mockMvc.perform(get("/employees/{id}",4L)	
-				.contentType("application/json"))
-                .andDo(print()).andExpect(status().isOk())
-                .andDo(document("{methodName}",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())))
-		                .andReturn();
-	
-		 Assert.assertEquals(result.getResponse().getContentAsString(), objectJson);
-    }
+		//given(repository.findById(4L).get()).willReturn(Optional.of(emp));
+		
+		//when(mock.findById(4L)).thenReturn(Optional.of(emp));
+		
+		  MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(uri)
+			      .accept(MediaType.APPLICATION_JSON_VALUE))
+		  // .andExpect(MockMvcResultMatchers.content().json(objectJson))
+		  .andDo(document("{methodName}",
+				  preprocessRequest(prettyPrint()),
+		          preprocessResponse(prettyPrint())))
+		  .andReturn();
+		 
+		  int status = result.getResponse().getStatus();
+		  assertEquals(200, status);
+		  assertEquals(result.getResponse().getContentAsString(), objectJson);
+			
+			}
 	
 	
 	// Done

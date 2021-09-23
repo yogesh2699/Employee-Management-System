@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ http GET 'http://localhost:8080/department/Delhi' \
-    'Content-Type:application/json'
-----
